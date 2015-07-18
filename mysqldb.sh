@@ -60,6 +60,7 @@ chown -R :www-data /home/"$ruser"/var/www/"$sitename"/public/wp-content/uploads
 
 # nginx server blocks, must use provided default
 # wget https://raw.githubusercontent.com/LuciferIAm/ScriptsnStuff/master/autodef ~/etc/nginx/sites-available/
+cd /home/"$ruser"/etc/nginx/sites-available/
 cp /home/"$ruser"/etc/nginx/sites-available/autodef /home/"$ruser"/etc/nginx/sites-available/"$sitename"
 sed -i -e "s/example.com/$sitename/g" /home/"$ruser"/etc/nginx/sites-available/"$sitename"
 ln -s /home/"$ruser"/etc/nginx/sites-available/"$sitename" /home/"$ruser"/etc/nginx/sites-enabled/
