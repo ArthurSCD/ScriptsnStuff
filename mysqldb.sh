@@ -60,7 +60,7 @@ sed -i -e "s/password_here/$password/g" /wordpress/wp-config.php
 sed -i -e "s/localhost/$host/g" /wordpress/wp-config.php
 
 
-rsync -avpP ~/wordpress/ /var/www/$sitename/public/
+rsync -avpP /wordpress/ /var/www/$sitename/public/
 chown -R $ruser:www-data /var/www/"$sitename"/public/*
 mkdir -p /var/www/$sitename/public/wp-content/uploads
 chown -R :www-data /var/www/$sitename/public/wp-content/uploads
