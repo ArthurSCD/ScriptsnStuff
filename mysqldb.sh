@@ -1,3 +1,10 @@
+#!/bin/bash
+
+if [ $(id -u) -ne 0]
+ then
+    sudo $0
+fi
+
 if [ $(uname) = "Linux" ] 
   then
 
@@ -46,24 +53,24 @@ CREATE="${DB}${USN}${PWD}${FL};"
 
 mysql -e "$CREATE"
 
-cp /home/"$ruser"/wordpress/wp-config-sample.php /home/"$ruser"/wordpress/wp-config.php
-sed -i -e "s/database_name_here/$database/g" /home/"$ruser"/wordpress/wp-config.php
-sed -i -e "s/username_here/$username/g" /home/"$ruser"/wordpress/wp-config.php
-sed -i -e "s/password_here/$password/g" /home/"$ruser"/wordpress/wp-config.php
-sed -i -e "s/localhost/$host/g" /home/"$ruser"/wordpress/wp-config.php
+cp /wordpress/wp-config-sample.php /wordpress/wp-config.php
+sed -i -e "s/database_name_here/$database/g" /wordpress/wp-config.php
+sed -i -e "s/username_here/$username/g" /wordpress/wp-config.php
+sed -i -e "s/password_here/$password/g" /wordpress/wp-config.php
+sed -i -e "s/localhost/$host/g" /wordpress/wp-config.php
 
 
-rsync -avpP /home/"$ruser"/wordpress/ /home/"$ruser"/var/www/"$sitename"/public/
-chown -R "$ruser":www-data /home/"$ruser"/var/www/"$sitename"/public/*
-mkdir /home/"$ruser"/var/www/"$sitename"/public/wp-content/uploads
-chown -R :www-data /home/"$ruser"/var/www/"$sitename"/public/wp-content/uploads
+rsync -avpP ~/wordpress/ /var/www/$sitename/public/
+chown -R $ruser:www-data /var/www/"$sitename"/public/*
+mkdir -p /var/www/$sitename/public/wp-content/uploads
+chown -R :www-data /var/www/$sitename/public/wp-content/uploads
 
 # nginx server blocks, must use provided default
 # wget https://raw.githubusercontent.com/LuciferIAm/ScriptsnStuff/master/autodef ~/etc/nginx/sites-available/
-cd /home/"$ruser"/etc/nginx/sites-available
-cp /home/"$ruser"/etc/nginx/sites-available/autodef /home/"$ruser"/etc/nginx/sites-available/"$sitename"
-sed -i -e "s/example.com/$sitename/g" /home/"$ruser"/etc/nginx/sites-available/"$sitename"
-ln -s /home/"$ruser"/etc/nginx/sites-available/"$sitename" /home/"$ruser"/etc/nginx/sites-enabled/
+
+cp "/etc/nginx/sites-available/autodef" "/etc/nginx/sites-available/$sitename"
+sed -i -e "s/example.com/$sitename/g" "/etc/nginx/sites-available/$sitename"
+ln -s "/etc/nginx/sites-available/$sitename" "/etc/nginx/sites-enabled/"
 service nginx restart
 service php5-fpm restart
 
