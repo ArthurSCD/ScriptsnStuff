@@ -52,7 +52,7 @@ sed -i -e "s/username_here/$username/g" /home/"$ruser"/wordpress/wp-config.php
 sed -i -e "s/password_here/$password/g" /home/"$ruser"/wordpress/wp-config.php
 sed -i -e "s/localhost/$host/g" /home/"$ruser"/wordpress/wp-config.php
 
-mkdir -p /home/"$ruser"/var/www/"$sitename"/public
+
 rsync -avpP /home/"$ruser"/wordpress/ /home/"$ruser"/var/www/"$sitename"/public/
 chown -R "$ruser":www-data /home/"$ruser"/var/www/"$sitename"/public/*
 mkdir /home/"$ruser"/var/www/"$sitename"/public/wp-content/uploads
