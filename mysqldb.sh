@@ -24,6 +24,18 @@ if [ $(uname) = "Linux" ]
 		echo -n "Enter password: "
 		read password
 	done
+	
+	while [ -z "$sitename" ];
+	do
+		echo -n "Enter sitename: "
+		read sitename
+	done
+
+	while [ -z "$ruser" ];
+	do
+		echo -n "Root user (you): "
+		read ruser
+	done		
 fi
 
 DB="CREATE DATABASE $database;"
@@ -39,3 +51,19 @@ sed -i -e "s/database_name_here/$database/g" ~/wordpress/wp-config.php
 sed -i -e "s/username_here/$username/g" ~/wordpress/wp-config.php
 sed -i -e "s/password_here/$password/g" ~/wordpress/wp-config.php
 sed -i -e "s/localhost/$host/g" ~/wordpress/wp-config.php
+
+mkdir -p "$sitename"
+rsync -avpP ~/wordpress/ "$sitename"
+chown -R "$ruser":www-data "$sitename"*
+mkdir "$sitename"wp-content/uploads
+chown -R :www-data "$sitename"wp-content/uploads
+
+# nginx server blocks, must use provided default
+# wget https://raw.githubusercontent.com/LuciferIAm/ScriptsnStuff/master/autodef ~/etc/nginx/sites-available/
+cp ~/etc/nginx/sites-available/autodef ~/etc/nginx/sites-available/"$sitename"
+sed -i -e "s/example.com/$sitename/g" ~/etc/nginx/sites-available/"$sitename"
+ln -s ~/etc/nginx/sites-available/"$sitename" ~/etc/nginx/sites-enabled/
+service nginx restart
+service php5-fpm restart
+
+#install finished! just go to your site now!
