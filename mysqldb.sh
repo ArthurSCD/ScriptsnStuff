@@ -29,7 +29,7 @@ CREATE="${DB}${USN}${PWD}${FL};"
 mysql -e "$CREATE"
 
 exit
-
+cp ~/wordpress/wp-config-sample.php ~/wordpress/wp-config.php
 sed -i -e "s/database_name_here/$database/g" ~/wordpress/wp-config.php
 sed -i -e "s/username_here/$username/g" ~/wordpress/wp-config.php
 sed -i -e "s/password_here/$password/g" ~/wordpress/wp-config.php
