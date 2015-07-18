@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ $(id -u) -ne 0]
+if [ $(id -u) -ne 0 ]
  then
     sudo $0
 fi
