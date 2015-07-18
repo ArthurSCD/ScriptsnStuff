@@ -27,3 +27,10 @@ FL="FLUSH PRIVILEGES;"
 CREATE="${DB}${USN}${PWD}${FL};"
 
 mysql -e "$CREATE"
+
+exit
+
+sed -i -e 's/database_name_here/$database/g' ~/wordpress/wp-config.php
+sed -i -e 's/username_here/$username/g' ~/wordpress/wp-config.php
+sed -i -e 's/password_here/$password/g' ~/wordpress/wp-config.php
+sed -i -e 's/localhost/$service/g' ~/wordpress/wp-config.php
