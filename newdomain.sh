@@ -12,7 +12,7 @@ if [ $(uname) = "Linux" ]
 	while [ -z "$sitename" ];
 	do
 		echo -n "Enter name of site: "
-		read site
+		read sitename
 	done
 fi
 
