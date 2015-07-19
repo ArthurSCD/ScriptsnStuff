@@ -3,6 +3,7 @@
 if [ $(id -u) -ne 0 ]
  then
     sudo $0
+    exit 0
 fi
 
 if [ $(uname) = "Linux" ] 
