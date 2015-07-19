@@ -18,4 +18,4 @@ fi
 
 mkdir -p "/srv/www/$sitename"
 mkdir -p "/srv/www/$sitename/public"
-mdkir -p "/srv/www/$sitename/logs"
+mkdir -p "/srv/www/$sitename/logs"
