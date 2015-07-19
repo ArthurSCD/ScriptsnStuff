@@ -1,11 +1,5 @@
 #!/bin/bash
 
-if [ $(id -u) -ne 0 ]
- then
-    sudo $0
-    exit 0
-fi
-
 if [ $(uname) = "Linux" ] 
   then
 
@@ -54,17 +48,23 @@ CREATE="${DB}${USN}${PWD}${FL};"
 
 mysql -e "$CREATE"
 
+if [ $(id -u) -ne 0 ]
+ then
+    sudo $0
+    exit 0
+fi
+
 cp "/home/$ruser/wordpress/wp-config-sample.php" "/home/$ruser/wordpress/wp-config.php"
 sed -i -e "s/database_name_here/$database/g" "/home/$ruser/wordpress/wp-config.php"
 sed -i -e "s/username_here/$username/g" "/home/$ruser/wordpress/wp-config.php"
 sed -i -e "s/password_here/$password/g" "/home/$ruser/wordpress/wp-config.php"
-sed -i -e "s/localhost/$host/g" "/home/$ruser/wordpress/wp-config.php"
 
 
-rsync -avpP "/home/$ruser/wordpress/" "/var/www/$sitename/public/"
-chown -R $ruser:www-data "/var/www/$sitename/public/*"
-mkdir -p "/var/www/$sitename/public/wp-content/uploads"
-chown -R :www-data "/var/www/$sitename/public/wp-content/uploads"
+
+rsync -avpP "/home/$ruser/wordpress/" "/srv/www/$sitename/public/"
+chown -R $ruser:www-data "/srv/www/$sitename/public/"
+mkdir -p "/srv/www/$sitename/public/wp-content/uploads"
+chown -R :www-data "/srv/www/$sitename/public/wp-content/uploads"
 
 # nginx server blocks, must use provided default
 # wget https://raw.githubusercontent.com/LuciferIAm/ScriptsnStuff/master/autodef ~/etc/nginx/sites-available/
