@@ -61,10 +61,10 @@ sed -i -e "s/password_here/$password/g" "/home/$ruser/wordpress/wp-config.php"
 sed -i -e "s/localhost/$host/g" "/home/$ruser/wordpress/wp-config.php"
 
 
-rsync -avpP "/home/$ruser/wordpress/" "/home/$ruser/var/www/$sitename/public/"
-chown -R $ruser:www-data "/home/$ruser/var/www/$sitename/public/*"
-mkdir -p "/home/$ruser/var/www/$sitename/public/wp-content/uploads"
-chown -R :www-data "/home/$ruser/var/www/$sitename/public/wp-content/uploads"
+rsync -avpP "/home/$ruser/wordpress/" "/var/www/$sitename/public/"
+chown -R $ruser:www-data "/var/www/$sitename/public/*"
+mkdir -p "/var/www/$sitename/public/wp-content/uploads"
+chown -R :www-data "/var/www/$sitename/public/wp-content/uploads"
 
 # nginx server blocks, must use provided default
 # wget https://raw.githubusercontent.com/LuciferIAm/ScriptsnStuff/master/autodef ~/etc/nginx/sites-available/
