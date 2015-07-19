@@ -15,11 +15,11 @@ if [ $(uname) = "Linux" ]
 		read username
 	done
 	
-	while [ -z "$host" ];
+	while [ -z "$prefix" ];
 	do
-		echo -n "Enter host: "
-		read host
-	done	
+		echo -n "Enter prefix: "
+		read prefix
+	done
 
 	while [ -z "$password" ];
 	do
@@ -41,7 +41,7 @@ if [ $(uname) = "Linux" ]
 fi
 
 DB="CREATE DATABASE $database;"
-USN="CREATE USER $username@$host IDENTIFIED BY '$password';"
+USN="CREATE USER $username@localhost IDENTIFIED BY '$password';"
 PWD="GRANT ALL PRIVILEGES ON $database.* TO $username;"
 FL="FLUSH PRIVILEGES;"
 CREATE="${DB}${USN}${PWD}${FL};"
@@ -58,6 +58,7 @@ cp "/home/$ruser/wordpress/wp-config-sample.php" "/home/$ruser/wordpress/wp-conf
 sed -i -e "s/database_name_here/$database/g" "/home/$ruser/wordpress/wp-config.php"
 sed -i -e "s/username_here/$username/g" "/home/$ruser/wordpress/wp-config.php"
 sed -i -e "s/password_here/$password/g" "/home/$ruser/wordpress/wp-config.php"
+sed -i -e "s/wp_/$prefix/g" "/home/$ruser/wordpress/wp-config.php"
 
 
 
