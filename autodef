@@ -5,9 +5,9 @@ server {
         root /var/www/example.com/public;
         index index.php index.html index.htm;
 
-        server_name example.com;
+        server_name www.example.com example.com;
 
         
-        include scripts.d/*.conf;
+        include /etc/nginx/scripts.d/*.conf;
         
 }
