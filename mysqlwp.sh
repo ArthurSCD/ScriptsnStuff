@@ -46,7 +46,7 @@ PWD="GRANT ALL PRIVILEGES ON $database.* TO $username;"
 FL="FLUSH PRIVILEGES;"
 CREATE="${DB}${USN}${PWD}${FL};"
 
-mysql -e "$CREATE"
+sudo -u bam mysql -e "$CREATE"
 
 if [ $(id -u) -ne 0 ]
  then
