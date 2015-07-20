@@ -56,4 +56,4 @@ export ruser
 export prefix
 env
 
-../wpinstall.sh
+[ -f "./wpinstall.sh" ] && . "/wpinstall.sh"
