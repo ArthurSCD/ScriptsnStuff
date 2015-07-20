@@ -1,5 +1,11 @@
 #!/bin/bash
 
+if [ $(id -u) -ne 0 ]
+ then
+    sudo $0
+    exit 0
+fi
+
 if [ $(uname) = "Linux" ] 
   then
 
@@ -48,11 +54,7 @@ CREATE="${DB}${USN}${PWD}${FL};"
 
 sudo -u bam mysql -e "$CREATE"
 
-if [ $(id -u) -ne 0 ]
- then
-    sudo $0
-    exit 0
-fi
+
 
 cp "/home/$ruser/wordpress/wp-config-sample.php" "/home/$ruser/wordpress/wp-config.php"
 sed -i -e "s/database_name_here/$database/g" "/home/$ruser/wordpress/wp-config.php"
