@@ -48,7 +48,7 @@ fi
 
 DB="CREATE DATABASE $database;"
 USN="CREATE USER $username@localhost IDENTIFIED BY '$password';"
-PWD="GRANT ALL PRIVILEGES ON $database.* TO $username;"
+PWD="GRANT ALL PRIVILEGES ON $database.* TO $username@localhost;"
 FL="FLUSH PRIVILEGES;"
 CREATE="${DB}${USN}${PWD}${FL};"
 
