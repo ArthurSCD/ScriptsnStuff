@@ -62,8 +62,6 @@ sed -i -e "s/username_here/$username/g" "/home/$ruser/wordpress/wp-config.php"
 sed -i -e "s/password_here/$password/g" "/home/$ruser/wordpress/wp-config.php"
 sed -i -e "s/wp_/$prefix/g" "/home/$ruser/wordpress/wp-config.php"
 
-
-
 rsync -avpP "/home/$ruser/wordpress/" "/srv/www/$sitename/public/"
 chown -R $ruser:www-data "/srv/www/$sitename/public/"
 mkdir -p "/srv/www/$sitename/public/wp-content/uploads"
