@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 if [ $(uname) = "Linux" ] 
   then
 
@@ -16,6 +15,12 @@ if [ $(uname) = "Linux" ]
 		read username
 	done
 	
+	while [ -z "$prefix" ];
+	do
+		echo -n "Enter prefix: "
+		read prefix
+	done
+
 	while [ -z "$password" ];
 	do
 		echo -n "Enter password: "
@@ -37,7 +42,7 @@ fi
 
 DB="CREATE DATABASE $database;"
 USN="CREATE USER $username@localhost IDENTIFIED BY '$password';"
-PWD="GRANT ALL PRIVILEGES ON $database.* TO $username@localhost;"
+PWD="GRANT ALL PRIVILEGES ON $database.* TO $username;"
 FL="FLUSH PRIVILEGES;"
 CREATE="${DB}${USN}${PWD}${FL};"
 
@@ -48,5 +53,7 @@ export username
 export password
 export sitename
 export ruser
+export prefix
+env
 
 ./wpinstall.sh
