@@ -52,7 +52,7 @@ PWD="GRANT ALL PRIVILEGES ON $database.* TO $username@localhost;"
 FL="FLUSH PRIVILEGES;"
 CREATE="${DB}${USN}${PWD}${FL};"
 
-sudo -u bam mysql -e "$CREATE"
+sudo -u "$ruser" mysql -e "$CREATE"
 
 
 
