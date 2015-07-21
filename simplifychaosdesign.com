@@ -7,12 +7,12 @@ server {
         access_log /srv/www/simplifychaosdesign.com/logs/access.log;
         error_log /srv/www/simplifychaosdesign.com/logs/error.log;
 
-        location / {
+       
 
         root /srv/www/simplifychaosdesign.com/public;
         index index.php index.html index.htm;
 
-    }
+    
 
         rewrite_log on;
 
