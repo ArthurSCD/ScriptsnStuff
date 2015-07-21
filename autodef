@@ -1,18 +1,15 @@
 server {
-        listen 80 default_server;
+        listen 80;
         listen [::]:80 default_server ipv6only=on;
         
         server_name www.example.com example.com;
+        
         access_log /srv/www/example.com/logs/access.log;
         error_log /srv/www/example.com/logs/error.log;
 
         root /srv/www/example.com/public;
         index index.php index.html index.htm;
         rewrite_log on;
-        
-
-        server_name www.example.com example.com;
-
         
         include /etc/nginx/scripts.d/*.conf;
         
