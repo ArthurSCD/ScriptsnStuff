@@ -62,10 +62,10 @@ sed -i -e "s/username_here/$username/g" "/home/$ruser/wordpress/wp-config.php"
 sed -i -e "s/password_here/$password/g" "/home/$ruser/wordpress/wp-config.php"
 sed -i -e "s/wp_/$prefix/g" "/home/$ruser/wordpress/wp-config.php"
 
-rsync -avpP "/home/$ruser/wordpress/" "/srv/www/$sitename/public/"
-chown -R $ruser:www-data "/srv/www/$sitename/public/"
+cp -r "/home/$ruser/wordpress/*" "/srv/www/$sitename/public/"
+chown -R scdadmin:www-data "/srv/www/$sitename/public/"
 mkdir -p "/srv/www/$sitename/public/wp-content/uploads"
-chown -R :www-data "/srv/www/$sitename/public/wp-content/uploads"
+chown -R scdadmin:www-data "/srv/www/$sitename/public/wp-content/uploads"
 
 # nginx server blocks, must use provided default
 # wget https://raw.githubusercontent.com/LuciferIAm/ScriptsnStuff/master/autodef ~/etc/nginx/sites-available/
