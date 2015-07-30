@@ -1,7 +1,5 @@
 server {
         listen 80;
-        listen [::]:80 default_server ipv6only=on;
-        
         server_name www.example.com example.com;
         
         access_log /srv/www/example.com/logs/access.log;
@@ -12,5 +10,6 @@ server {
         rewrite_log on;
         
         include /etc/nginx/scripts.d/*.conf;
+       # include /srv/www/example.com/public/nginx.conf;
         
 }
