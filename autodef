@@ -1,6 +1,6 @@
 server {
         listen 80;
-        server_name www.example.com example.com;
+        server_name example.com www.example.com;
         
         access_log /srv/www/example.com/logs/access.log;
         error_log /srv/www/example.com/logs/error.log;
